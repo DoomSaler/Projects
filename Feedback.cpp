@@ -7,7 +7,7 @@
 #include <sstream>
 
 //======================================
-//Класс отзыва
+//ГЉГ«Г Г±Г± Г®ГІГ§Г»ГўГ 
 //======================================
 
 Feedback::Feedback():name_(""), surname_(""), text_(""), rating_(0) {}
@@ -21,20 +21,20 @@ Feedback::~Feedback() {}
 
 void Feedback::show()
 {
-    std::cout << "Имя и фамилиля пользователя: " << name_ << " " << surname_ <<'\n';
-    std::cout << "Оценка, поставленная пользователем: " << rating_ << " из 10\n";
-    std::cout << "Текст комментария:\n" << text_ << "\n\n";
+    std::cout << "Г€Г¬Гї ГЁ ГґГ Г¬ГЁГ«ГЁГ«Гї ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гї: " << name_ << " " << surname_ <<'\n';
+    std::cout << "ГЋГ¶ГҐГ­ГЄГ , ГЇГ®Г±ГІГ ГўГ«ГҐГ­Г­Г Гї ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«ГҐГ¬: " << rating_ << " ГЁГ§ 10\n";
+    std::cout << "Г’ГҐГЄГ±ГІ ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГї:\n" << text_ << "\n\n";
 }
 
 void Feedback::edit()
 {
     std::string name;
-    name = checkString("имя");
+    name = checkString("ГЁГ¬Гї");
     std::string surname;
-    surname = checkString("фамилию");
+    surname = checkString("ГґГ Г¬ГЁГ«ГЁГѕ");
     unsigned short int rating;
-    rating = checkNumber(10, "оценку (от 0 до 10)");
-    std::cout << "Введите текст комментария:\n";
+    rating = checkNumber(10, "Г®Г¶ГҐГ­ГЄГі (Г®ГІ 0 Г¤Г® 10)");
+    std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ ГІГҐГЄГ±ГІ ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГї:\n";
     std::cin.ignore(std::cin.rdbuf()->in_avail());
     std::string text;
     getline(std::cin, text, '\n');
@@ -65,7 +65,7 @@ std::string Feedback::getText()
 }
 
 //======================================
-//Класс базы отзывов
+//ГЉГ«Г Г±Г± ГЎГ Г§Г» Г®ГІГ§Г»ГўГ®Гў
 //======================================
 
 Table::Table() : size_(0) {}
@@ -91,7 +91,7 @@ bool Table::save(std::ofstream& f)
 
 bool Table::load(std::ifstream& f)
 {
-    // Ненавижу эту функцию
+    // ГЌГҐГ­Г ГўГЁГ¦Гі ГЅГІГі ГґГіГ­ГЄГ¶ГЁГѕ
     size_ = 0;
     delete[] table_;
     table_ = NULL;
@@ -117,7 +117,7 @@ bool Table::load(std::ifstream& f)
             if (rating < 0 || rating > 10)
                 errors++;
             if (errors > 0) {
-                std::cout << "Обнаружена ошибка! Выполнениие дальше невозможно!";
+                std::cout << "ГЋГЎГ­Г Г°ГіГ¦ГҐГ­Г  Г®ГёГЁГЎГЄГ ! Г‚Г»ГЇГ®Г«Г­ГҐГ­ГЁГЁГҐ Г¤Г Г«ГјГёГҐ Г­ГҐГўГ®Г§Г¬Г®Г¦Г­Г®!";
                 return false;
             }
             std::string text;
@@ -126,7 +126,7 @@ bool Table::load(std::ifstream& f)
             add(name, surname, text, rating);
         }
         f.close();
-        return false;
+        return true;
     }
     else {
         f.close();
@@ -159,7 +159,7 @@ bool Table::showOutFile(std::ifstream& f)
             feedback.show();
         }
         f.close();
-        return false;
+        return true;
     }
     else { 
         f.close();
@@ -179,12 +179,12 @@ void Table::add(size_t n)
     table_ = temp;
     for (size_t i = currentSize; i < size_; i++) {
         std::string name;
-        name = checkString("имя пользователя");
+        name = checkString("ГЁГ¬Гї ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гї");
         std::string surname;
-        surname = checkString("фамилию пользователя");
+        surname = checkString("ГґГ Г¬ГЁГ«ГЁГѕ ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гї");
         short unsigned int rating;
-        rating = checkNumber(10, "оценку (от 0 до 10)");
-        std::cout << "Введите отзыв:\n";
+        rating = checkNumber(10, "Г®Г¶ГҐГ­ГЄГі (Г®ГІ 0 Г¤Г® 10)");
+        std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г®ГІГ§Г»Гў:\n";
         std::cin.ignore(std::cin.rdbuf()->in_avail());
         std::string text;
         getline(std::cin, text, '\n');
@@ -246,7 +246,7 @@ void Table::find(std::string name, std::string surname)
 {
     for (size_t i = 0; i < size_; i++)
         if (table_[i].getName() == name && table_[i].getSurname() == surname) {
-            std::cout << "Номер: " << i + 1 << '\n';
+            std::cout << "ГЌГ®Г¬ГҐГ°: " << i + 1 << '\n';
             table_[i].show();
         }
 }
@@ -254,7 +254,7 @@ void Table::find(std::string name, std::string surname)
 void Table::showAll()
 {
     for (size_t i = 0; i < size_; i++) {
-        std::cout << "Номер: " << i + 1 << '\n';
+        std::cout << "ГЌГ®Г¬ГҐГ°: " << i + 1 << '\n';
         table_[i].show();
     }
 }
